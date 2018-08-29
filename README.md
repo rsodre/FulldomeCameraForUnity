@@ -13,6 +13,10 @@ If we consider performance and quality, this solution is far from ideal. To make
 
 Ideally, Unity should provide us with a custom camera, that instead of using the usual frustum to raster each frame, would use our custom method that calculate rays from the camera to world, for each pixel. Like Cinema 4D plugins [can do](https://developers.maxon.net/docs/Cinema4DCPPSDK/html/class_video_post_data.html#a597ac521409b00572117ea604536e06f). But there's no way to do it in Unity :(
 
+There's an [issue in Unity Feedback](https://feedback.unity3d.com/suggestions/correct-camera-distortion-issue-on-the-side-by-using-spherical-clipping-planes-instead-of-flat-near-far-clipping-plane) that suggests to solve that problem. The request description don't sound like it, but the solution to the problem is the same (see my comment). Please give some votes.
+
+And here's the Unity [forum thread](https://forum.unity.com/threads/fulldome-camera-for-unity.547939/).
+
 
 ## Install
 
@@ -98,7 +102,7 @@ Works with Metal API only. Check [here](https://docs.unity3d.com/Manual/Metal.ht
 
 ### Spout (Windows only)
 
-[Spout](http://spout.zeal.co/) is teh equivalent of Syphon on Windows, supported by all VJ apps.
+[Spout](http://spout.zeal.co/) is the equivalent of Syphon on Windows, supported by all VJ apps.
 
 To create a Spout server, use [KlakSpout](https://github.com/keijiro/KlakSpout). Just add a `SpoutSender` component to your `FulldomeCamera` instance.
 

@@ -1,10 +1,12 @@
 # FulldomeCameraForUnity
 
-Compatible with **Unity 2018.2**
+Compatible with **Unity 2018.3**, standard rendering paths (no HDRP yet)
 
 * Newer versions may be available at the [master branch](https://github.com/rsodre/FulldomeCameraForUnity)
-* For **Unity 2018.1**, checkout the [2018.1 tag](https://github.com/rsodre/FulldomeCameraForUnity/tree/2018.1)
-* For **Unity 5.6**, use [FulldomeCameraForUnity5](https://github.com/rsodre/FulldomeCameraForUnity5)
+* For older versions, checkout by tag:
+[2018.2](https://github.com/rsodre/FulldomeCameraForUnity/tree/2018.2) /
+[2018.1](https://github.com/rsodre/FulldomeCameraForUnity/tree/2018.1)
+* For **Unity 5.6**: Use [FulldomeCameraForUnity5](https://github.com/rsodre/FulldomeCameraForUnity5)
 
 ## Introduction
 

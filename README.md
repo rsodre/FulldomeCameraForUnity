@@ -1,13 +1,16 @@
 # FulldomeCameraForUnity
 
-Fulldome Camera for Unity 2018+
+Compatible with **Unity 2018.2**
 
-For Unity 5.6, use [FulldomeCameraForUnity5](https://github.com/rsodre/FulldomeCameraForUnity5)
+* Newer versions may be available at the [master branch](https://github.com/rsodre/FulldomeCameraForUnity)
+* For **Unity 2018.1**, checkout the [2018.1 tag](https://github.com/rsodre/FulldomeCameraForUnity/tree/2018.1)
+* For **Unity 5.6**, use [FulldomeCameraForUnity5](https://github.com/rsodre/FulldomeCameraForUnity5)
+
+## Introduction
 
 ![](images/example.png)
 
-
-This plugin was inspired by [this article](https://blogs.unity3d.com/2018/01/26/stereo-360-image-and-video-capture/), and relies on the `Camera.RenderToCubemap` [method](https://docs.unity3d.com/ScriptReference/Camera.RenderToCubemap.html) from Unity 2018.1. It will render your game's camera as a [cubemap](https://en.wikipedia.org/wiki/Cube_mapping) and distort it to a [Domemaster](http://download.studioavante.com/TEMPLATES/DOME/DOME_template_2K.png) format.
+This plugin was inspired by [this article](https://blogs.unity3d.com/2018/01/26/stereo-360-image-and-video-capture/), and relies on the `Camera.RenderToCubemap` [method](https://docs.unity3d.com/ScriptReference/Camera.RenderToCubemap.html) first available in Unity 2018.1. It will render your game's camera as a [cubemap](https://en.wikipedia.org/wiki/Cube_mapping) and distort it to a [Domemaster](http://download.studioavante.com/TEMPLATES/DOME/DOME_template_2K.png) format.
 
 If we consider performance and quality, this solution is far from ideal. To make a cubemap, we need to render the scene (up to) 6 times, with 6 different cameras, one for each face of the cube. Rendering a good looking game once is already a challenge, everybody knows, just imagine six. Another problem is that some effects and shaders that depend on the camera position, like reflections, will look weird where the cube faces meet, because neigboring pixels were calculated for different cameras. Front-facing sprites commonly used on particles also will suffer from the same problem.
 
@@ -17,12 +20,14 @@ There's an [issue in Unity Feedback](https://feedback.unity3d.com/suggestions/co
 
 And here's the Unity [forum thread](https://forum.unity.com/threads/fulldome-camera-for-unity.547939/).
 
+Get inspired and share your works at the [Unity 3D Fulldome Development](https://www.facebook.com/groups/640529606365067/) and [Fulldome Artists United](https://www.facebook.com/groups/FulldomeArtistsUnited/) groups.
+
 
 ## Install
 
 Download and import the latest [package](https://github.com/rsodre/FulldomeCameraForUnity/releases) release.
 
-Alternatvely, you can [clone](https://help.github.com/articles/cloning-a-repository/) or [download](https://github.com/rsodre/FulldomeCameraForUnity/archive/master.zip) this repository and open as a full project in Unity 2018.1 or newer.
+Alternatvely, you can [clone](https://help.github.com/articles/cloning-a-repository/) or [download](https://github.com/rsodre/FulldomeCameraForUnity/archive/master.zip) this repository and open as a full project in Unity.
 
 
 ## Usage
@@ -126,13 +131,14 @@ So the game can be played in fullscreen (Windows or macOS), sending a mirror ima
 
 
 
-## Thanks
+## Credits
 
-The work of all these people allowed us to get to this point.
+Developed by [Roger Sodré](https://github.com/rsodre) of [Studio Avante](http://www.studioavante.com/) and [United VJs](http://unitedvjs.com.br/).
 
-Many thanks to Paul Bourke for his amazing [dome research](http://paulbourke.net/dome/)
+Many thanks to all these people whose work allowed us to get to this point....
+
+Paul Bourke for his amazing [dome research](http://paulbourke.net/dome/)
 
 [Anton Marini](https://github.com/vade) and [Tom Butterworth](https://github.com/bangnoise) for revolutionizing visuals with [Syphon](https://github.com/Syphon).
 
-[David Lublin](https://github.com/dlublin) of [Vidvod](https://github.com/Vidvox) for all the freebie tools and for the amazing [VDMX](https://vidvox.net/).
-
+[David Lublin](https://github.com/dlublin) of [Vidvox](https://github.com/Vidvox) for all the freebie tools and for the amazing [VDMX](https://vidvox.net/).

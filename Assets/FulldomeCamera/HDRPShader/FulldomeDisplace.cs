@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEditor.ShaderGraph;
 using System.Reflection;
 
+#if THIS_KIND_OF_NODE_HAS_BEEN_DEPRECATED
+
 // Thanks to:
 //	http://web.engr.oregonstate.edu/~mjb/WebMjb/Papers/asmedome.pdf
 //	https://kineme.net/Discussion/GeneralDiscussion/Fisheyeviewplugin
@@ -130,3 +132,4 @@ class InverseMatrix4 : CodeFunctionNode
     }
 }
 
+#endif

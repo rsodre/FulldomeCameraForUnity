@@ -6,27 +6,8 @@ using UnityEngine.Rendering;
 
 namespace Avante
 {
-	public enum Orientation
-	{
-		Fisheye = 0,
-		Fulldome = 1,
-	}
-
-	[Flags]
-	public enum Face
-	{
-		None = 0,
-		Everything = 63,
-		PositiveX = (1 << CubemapFace.PositiveX),
-		NegativeX = (1 << CubemapFace.NegativeX),
-		PositiveY = (1 << CubemapFace.PositiveY),
-		NegativeY = (1 << CubemapFace.NegativeY),
-		PositiveZ = (1 << CubemapFace.PositiveZ),
-		NegativeZ = (1 << CubemapFace.NegativeZ),
-	}
-
 	[ExecuteInEditMode]
-	public class FulldomeCamera : MonoBehaviour
+	public class FulldomeCameraLegacy : MonoBehaviour
 	{
 		public Camera mainCamera;
 		[EnumFlags]
@@ -84,8 +65,8 @@ namespace Avante
 			}
 		}
 
-		static FulldomeCamera _instance;
-		public static FulldomeCamera Instance { get { return _instance; } }
+		static FulldomeCameraLegacy _instance;
+		public static FulldomeCameraLegacy Instance { get { return _instance; } }
 
 		void Awake()
 		{

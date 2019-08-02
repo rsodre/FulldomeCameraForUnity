@@ -1,18 +1,45 @@
-# FulldomeCameraForUnity
+# Fulldome Camera For Unity
 
-Compatible with **Unity 2018.3**, standard rendering paths (no HDRP yet)
+Suite of tools for building games for Fulldome.
 
-* Newer versions may be available at the [master branch](https://github.com/rsodre/FulldomeCameraForUnity)
-* For older versions, checkout by tag:
+There are currently three approaches that can be used to simulate a fisheye lens on Unity.
+
+1.  **Fulldome Camera**: Renders the scene as a Cubemap and extract a Domemaster to the Camera.
+2.  **VFX Graph**: No camera tricks, use custom VFX blocks to distort particles around the camera, as  if it was a Fisheye lens (WIP, coming soon)
+3.  **Shader Graph**: No camera tricks, use custom Shader Graph nodes to distort mesh vertices around the camera, as  if it was a Fisheye lens (WIP, coming soon)
+
+Get inspired and share your works at the [Unity 3D Fulldome Development](https://www.facebook.com/groups/640529606365067/) and [Fulldome Artists United](https://www.facebook.com/groups/FulldomeArtistsUnited/) groups.
+
+There's plenty of information and considerations about the Fulldome format on my [Blendy 360 Cam](http://blendy360cam.com/)'s [manual](http://download.studioavante.com/Blendy360Cam/Blendy360Cam_Manual.pdf).
+
+
+## Downloads
+
+* Starting with **Unity 2019.2**, this plugin is compatible with **HDRP** and the **Standard** renderer.
+
+	1. Download and import the latest [Release package](https://github.com/rsodre/FulldomeCameraForUnity/releases).
+	2. [Clone](https://help.github.com/articles/cloning-a-repository/) or [download](https://github.com/rsodre/FulldomeCameraForUnity/archive/master.zip) this repository and open as a full project in Unity.
+	3. For specific Unity versions, checkout by tag:
+[2019.2](https://github.com/rsodre/FulldomeCameraForUnity/tree/2019.2)
+
+
+* **Legacy Releases**, compatible with Standard Renderer only (not HDRP). Download from the [Releases page](https://github.com/rsodre/FulldomeCameraForUnity/releases) or checkout by tag:
+[2019.1](https://github.com/rsodre/FulldomeCameraForUnity/tree/2019.1) /
+[2018.3](https://github.com/rsodre/FulldomeCameraForUnity/tree/2018.3) /
 [2018.2](https://github.com/rsodre/FulldomeCameraForUnity/tree/2018.2) /
 [2018.1](https://github.com/rsodre/FulldomeCameraForUnity/tree/2018.1)
-* For **Unity 5.6**: Use [FulldomeCameraForUnity5](https://github.com/rsodre/FulldomeCameraForUnity5)
 
-## Introduction
+* For **Unity 5.6**, use [FulldomeCameraForUnity5](https://github.com/rsodre/FulldomeCameraForUnity5)
+
+
+
+## 1) Fulldome Camera
 
 ![](images/example.png)
 
-This plugin was inspired by [this article](https://blogs.unity3d.com/2018/01/26/stereo-360-image-and-video-capture/), and relies on the `Camera.RenderToCubemap` [method](https://docs.unity3d.com/ScriptReference/Camera.RenderToCubemap.html) first available in Unity 2018.1. It will render your game's camera as a [cubemap](https://en.wikipedia.org/wiki/Cube_mapping) and distort it to a [Domemaster](http://download.studioavante.com/TEMPLATES/DOME/DOME_template_2K.png) format.
+### How it works
+
+This approach was inspired by [this article](https://blogs.unity3d.com/2018/01/26/stereo-360-image-and-video-capture/), and relies on the `Camera.RenderToCubemap` [method](https://docs.unity3d.com/ScriptReference/Camera.RenderToCubemap.html) first available in Unity 2018.1. It will render your game's camera as a [cubemap](https://en.wikipedia.org/wiki/Cube_mapping) and distort it to a [Domemaster](http://download.studioavante.com/TEMPLATES/DOME/DOME_template_2K.png) format.
 
 If we consider performance and quality, this solution is far from ideal. To make a cubemap, we need to render the scene (up to) 6 times, with 6 different cameras, one for each face of the cube. Rendering a good looking game once is already a challenge, everybody knows, just imagine six. Another problem is that some effects and shaders that depend on the camera position, like reflections, will look weird where the cube faces meet, because neigboring pixels were calculated for different cameras. Front-facing sprites commonly used on particles also will suffer from the same problem.
 
@@ -22,37 +49,26 @@ There's an [issue in Unity Feedback](https://feedback.unity3d.com/suggestions/co
 
 And here's the Unity [forum thread](https://forum.unity.com/threads/fulldome-camera-for-unity.547939/).
 
-Get inspired and share your works at the [Unity 3D Fulldome Development](https://www.facebook.com/groups/640529606365067/) and [Fulldome Artists United](https://www.facebook.com/groups/FulldomeArtistsUnited/) groups.
 
 
-## Install
+### Usage
 
-Download and import the latest [package](https://github.com/rsodre/FulldomeCameraForUnity/releases) release.
+This plugin needs just one script to run.
 
-Alternatvely, you can [clone](https://help.github.com/articles/cloning-a-repository/) or [download](https://github.com/rsodre/FulldomeCameraForUnity/archive/master.zip) this repository and open as a full project in Unity.
-
-
-## Usage
-
-This plugin needs just one prefab to run.
-
-
-### FulldomeCamera prefab
-
-Drop `FulldomeCamera/FulldomeCamera.prefab` anywhere in the scene.
-
-It contains a camera that renders to a **RenderTexture** that defines the final resolution. By defaut, it's using `FulldomeCamera2k` (2048 x 2048). If you're using a single projector with fisheye lenses, `FulldomeCamera1080p` will be perfect.
-
-The final Fulldome distorted image will be rendered to that texture, and stay there if you don't use it anywhere else (see your options on the next sections).
+Create one GameObject and add the `FulldomeForUnity/FulldomeCamera/Scripts/FulldomeCamera.cs` to it. Drop the scene's Main Camera to **Main Camera**. The Main Camera Component can now be disabled, since it will be replaced by the final texture.
 
 Configure your fulldome camera on this GameObject...
+
+![](images/FulldomeCamera.cs.png)
 
 
 * **Main Camera**: The camera used to render the cubemap. If null, `Camera.main` will be used.
 
-* **Cubemap Faces**: Depending on your camera orientation and **Horizon** setting, you can turn off some cubemap faces and save several passes. Fulldome cameras placed on the ground can turn off the **NegativeY**, for example.
+* **Cubemap Faces**: Depending on your camera orientation and **Horizon** setting, you can turn off some cubemap faces and save several passes. Flat cameras placed on the ground can turn off the **NegativeY**, for example.
 
 * **Orientation**: The point of interest, or sweet spot, on a Fulldome is close to the horizon on the bottom of the frame. On a Fisheye, it's on the center of the frame. This setting will consider this and rotate the main camera to target the correct sweet spot. 
+
+* **DomeMaster Resolution**: Resolution of the generated Domemaster frame, always square.
 
 * **Horizon**: Usually 180 degrees (half sphere).
 
@@ -60,32 +76,44 @@ Configure your fulldome camera on this GameObject...
 
 * **Masked**: Will ignore and paint black the area outside the fisheye circle. That's 27% less pixels, so please mask.
 
-There's plenty of information and considerations about the Fulldome format on my [Blendy 360 Cam](http://blendy360cam.com/)'s [manual](http://download.studioavante.com/Blendy360Cam/Blendy360Cam_Manual.pdf).
+* **Cubemap Fro**: Optional **Cubemap Render Texture** for the base Cubemap render that will be used to extract the Domemaster. If left empty, the script will automatically create a render texture with the same dimensions as the Domemaster.
 
 
-### FulldomePreview.cs (optional)
+### Examples
 
-To make your main camera display the Fulldome distorted image, drop the `FulldomePreview` component into your main camera (the one linked in `FulldomeCamera`). It will display it as Fisheye on the editor and during gameplay.
+* **FulldomeCameraHDRP**: Performance is quite bad right now, let's try to find why and help fix it?
 
-If you do that, create a new **Aspect** on the **Game View** called `Fulldome`, with **Aspect Ratio** of `1:1` and use it during development to preview it correctly.
+* **FulldomeCameraStandard**: Same as previous but using Standard assets. Please not that the SRP Asset must be excluded (Project Settings, Graphics, Scriptable Render Pipeline Settings).
 
-In the case where the dome is just for spectators and the player plays on the computer, there's no need to add this script. You'll see the normal main camera render on the computer screen.
+* **FulldomeCameraLegacy**: Uses the original implementation of this approach, using scripts from the `Legacy` folder. It worked exactly the same, but using the Camera component callbacks `OnPreRender` and `OnPostRender` as entry points to generate the Domemaster frame, and was a little bit more complicated to to setup. But was not compatible with Scriptable Render Pipeline. For more details, check the [2019.1](https://github.com/rsodre/FulldomeCameraForUnity/tree/2019.1) README.
 
-You can even create different spectator static camera(s) just for the dome (don't forget to link on `FulldomeCamera`), while the player uses a standard first or third person controller.
+## 2) VFX Graph
+
+No camera tricks! Please do not use together with the `FulldomeCamera.cs` script.
+ 
+Use a set of custom VFX blocks to distort particles around the camera, as  if it was a Fisheye lens.
+ 
+**Work in Progress**, will be added to the repository soon.
+
+## 3) Shader Graph
+
+No camera tricks! Please do not use together with the `FulldomeCamera.cs` script.
+
+Adapt your Shader Graph materials using a custom node to distort mesh vertices around the camera, as  if it was a Fisheye lens.
+
+**Work in Progress**, but some early tests are available at `FulldomeForUnity/Xperiments/ShaderGraph`. 
+
+The [main problem](https://forum.unity.com/threads/position-transformation.657289/) with this approach right now is that the SRP cameras do not have traditional Camera matrices to do the proper transformations. I'm still not sure if it's a bug or it's just how it works.
 
 
+## Capture
 
-### Capture.cs (optional)
+You can render scenes from Unity for your Fulldome movie, of course!
 
-The FulldomeCamera prefab comes with a (disabled) `Capture` component. When enabled, it will capture the game to disk, frame by frame, as static images.
-
-This capture script is very slow for real time, use it to render scripted or timelined animated sequences.
-
-The parameters are self-explanatory.
+Download [Unity Recorder](https://docs.unity3d.com/Packages/com.unity.recorder@2.0/manual/index.html) from the **Packages Manager**, and export the **Game View**.
 
 
-
-## To The Dome
+## ...And From Unity To The Dome
 
 Fulldome without a Dome is no fun at all!
 

@@ -8,7 +8,7 @@ namespace Avante
 	// Add this script to your main camera
 
 	[ExecuteInEditMode]
-	public class FulldomePreview : MonoBehaviour
+	public class FulldomePreviewLegacy : MonoBehaviour
 	{
 		Camera _TargetCamera { get { return GetComponent<Camera>(); } }
 
@@ -34,9 +34,9 @@ namespace Avante
 		void OnPreCull()
 		{
 			_fulldomeTexture = null;
-			if (!FulldomeCamera.IsRenderingCubemap && FulldomeCamera.Instance)
+			if (!FulldomeCameraLegacy.IsRenderingCubemap && FulldomeCameraLegacy.Instance)
 			{
-				_fulldomeTexture = FulldomeCamera.Instance.GetFulldomeTexture();
+				_fulldomeTexture = FulldomeCameraLegacy.Instance.GetFulldomeTexture();
 				if (_fulldomeTexture)
 				{
 					_cullingMask = _TargetCamera.cullingMask;

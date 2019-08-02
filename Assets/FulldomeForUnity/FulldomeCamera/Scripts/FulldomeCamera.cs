@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
-namespace Avante.HDRP
+namespace Avante
 {
 	public enum Orientation
 	{
@@ -33,8 +35,8 @@ namespace Avante.HDRP
 		NegativeZ = (1 << CubemapFace.NegativeZ),
 	}
 
-	[ExecuteInEditMode]
-	public class FulldomeCameraHDRP : MonoBehaviour
+	[ExecuteAlways]
+	public class FulldomeCamera : MonoBehaviour
 	{
 		public Camera mainCamera;
 		[EnumFlags]
@@ -47,7 +49,9 @@ namespace Avante.HDRP
 		public float domeTilt = 0.0f;
 		public bool masked;
 		//public bool renderEquirect = false;
-		[NonSerialized]
+
+		// Serialize to set your own FBOs
+		//[NonSerialized]
 		public RenderTexture cubemapFbo;
 		[NonSerialized]
 		public RenderTexture domemasterFbo;
@@ -90,6 +94,7 @@ namespace Avante.HDRP
 		{
 			if (_TargetCamera == null)
 				Destroy(this);
+			_TargetCamera.enabled = false;
 		}
 
 		void Initialize()
@@ -109,21 +114,26 @@ namespace Avante.HDRP
 			}
 		}
 
-		public void LateUpdate()
+		public void Update()
 		{
 			if (Application.isEditor)
 				Initialize();
+
+			// Schedule render before Unity Recorder, which uses LateUpdate()
 			StartCoroutine(RenderFrame());
 		}
 
 		IEnumerator RenderFrame()
 		{
 			yield return new WaitForEndOfFrame();
-	
+
+			// Save camera settings
+			var eyesEyeSepBackup = _TargetCamera.stereoSeparation;
 			// Render cubemap
-			//camera.stereoTargetEye = StereoTargetEyeMask.Left;
 			_TargetCamera.stereoSeparation = 0;
 			_TargetCamera.RenderToCubemap(_cubemapFbo, _FaceMask, Camera.MonoOrStereoscopicEye.Mono);
+			// Rollback camera settings
+			_TargetCamera.stereoSeparation = eyesEyeSepBackup;
 
 			//if (renderEquirect && cubemapFbo)
 			//cubemapFbo.ConvertToEquirect(equirectFbo, Camera.MonoOrStereoscopicEye.Mono);

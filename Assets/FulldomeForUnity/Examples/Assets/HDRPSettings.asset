@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cf1dab834d4ec34195b920ea7bbf9ec, type: 3}
-  m_Name: HDRP
+  m_Name: HDRPSettings
   m_EditorClassIdentifier: 
   m_RenderPipelineResources: {fileID: 11400000, guid: 3ce144cff5783da45aa5d4fdc2da14b7,
     type: 2}
   m_RenderPipelineRayTracingResources: {fileID: 0}
   m_RenderingPathDefaultCameraFrameSettings:
     bitDatas:
-      data1: 13849591582
+      data1: 69284264935197
       data2: 4539628424389459968
     lodBias: 1
     lodBiasMode: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
     maximumLODLevelMode: 0
   m_RenderingPathDefaultBakedOrCustomReflectionFrameSettings:
     bitDatas:
-      data1: 12884901888
+      data1: 64881914049309
       data2: 4539628424389459968
     lodBias: 1
     lodBiasMode: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
     maximumLODLevelMode: 0
   m_RenderingPathDefaultRealtimeReflectionFrameSettings:
     bitDatas:
-      data1: 12884901888
+      data1: 69279803252509
       data2: 4539628424389459968
     lodBias: 1
     lodBiasMode: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
       checkerboardDepthBuffer: 1
       upsampleType: 1
   allowShaderVariantStripping: 1
-  enableSRPBatcher: 0
+  enableSRPBatcher: 1
   shaderVariantLogLevel: 0
   diffusionProfileSettings: {fileID: 0}
   diffusionProfileSettingsList: []

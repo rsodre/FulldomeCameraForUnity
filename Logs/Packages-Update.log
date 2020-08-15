@@ -48,3 +48,12 @@ The following packages were updated:
   com.unity.timeline from version 1.1.0 to 1.2.10
 The following packages were removed:
   com.unity.package-manager-ui@2.2.0
+
+=== Fri Aug 14 23:19:18 2020
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.ide.vscode from version 1.1.4 to 1.2.1
+  com.unity.render-pipelines.high-definition from version 7.1.8 to 7.3.1

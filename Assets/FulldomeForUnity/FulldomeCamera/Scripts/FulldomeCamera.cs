@@ -127,13 +127,8 @@ namespace Avante
 		{
 			yield return new WaitForEndOfFrame();
 
-			// Save camera settings
-			var eyesEyeSepBackup = _TargetCamera.stereoSeparation;
 			// Render cubemap
-			_TargetCamera.stereoSeparation = 0;
-			_TargetCamera.RenderToCubemap(_cubemapFbo, _FaceMask, Camera.MonoOrStereoscopicEye.Mono);
-			// Rollback camera settings
-			_TargetCamera.stereoSeparation = eyesEyeSepBackup;
+			_TargetCamera.RenderToCubemap(_cubemapFbo, _FaceMask);
 
 			//if (renderEquirect && cubemapFbo)
 			//cubemapFbo.ConvertToEquirect(equirectFbo, Camera.MonoOrStereoscopicEye.Mono);

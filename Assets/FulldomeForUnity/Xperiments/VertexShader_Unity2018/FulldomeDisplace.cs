@@ -1,8 +1,8 @@
+#if !UNITY_2019_1_OR_NEWER
+
 using UnityEngine;
 using UnityEditor.ShaderGraph;
 using System.Reflection;
-
-#if !UNITY_2019_1_OR_NEWER
 
 // Thanks to:
 //	http://web.engr.oregonstate.edu/~mjb/WebMjb/Papers/asmedome.pdf

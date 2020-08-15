@@ -2,11 +2,11 @@
 
 Suite of tools for building games for Fulldome.
 
-There are currently three approaches that can be used to simulate a fisheye lens on Unity.
+Here there are three approaches that can be used to simulate a fisheye lens on Unity.
 
-1.  **Fulldome Camera**: Renders the scene as a Cubemap and extract a Domemaster to the Camera.
-2.  **VFX Graph**: No camera tricks, use custom VFX blocks to distort particles around the camera, as  if it was a Fisheye lens (WIP, coming soon)
-3.  **Shader Graph**: No camera tricks, use custom Shader Graph nodes to distort mesh vertices around the camera, as  if it was a Fisheye lens (WIP, coming soon)
+1.  **Fulldome Camera**: Renders the active camera as a 360 panorama (internally a Cubemap) and extracts a Domemaster from it.
+2.  **VFX Graph** (experimental): No camera tricks, use custom VFX blocks to distort particles around the camera, as  if it was a Fisheye lens
+3.  **Shader Graph** (experimental): No camera tricks, use custom Shader Graph nodes to distort mesh vertices around the camera, as  if it was a Fisheye lens
 
 Get inspired and share your works at the [Unity 3D Fulldome Development](https://www.facebook.com/groups/640529606365067/) and [Fulldome Artists United](https://www.facebook.com/groups/FulldomeArtistsUnited/) groups.
 
@@ -15,25 +15,25 @@ There's plenty of information and considerations about the Fulldome format on my
 
 ## Downloads
 
-* Starting with **Unity 2019.2**, this plugin is compatible with **HDRP** and the **Standard** renderer.
+* **HDRP**, compatible starting from **Unity 2019.2**
 
 	1. Download and import the latest [Release package](https://github.com/rsodre/FulldomeCameraForUnity/releases).
-	2. [Clone](https://help.github.com/articles/cloning-a-repository/) or [download](https://github.com/rsodre/FulldomeCameraForUnity/archive/master.zip) this repository and open as a full project in Unity.
-	3. For specific Unity versions, checkout by tag:
+	2. Or... [Clone](https://help.github.com/articles/cloning-a-repository/) or [download](https://github.com/rsodre/FulldomeCameraForUnity/archive/master.zip) this repository and open as a full project in Unity.
+	3. Or... For specific Unity versions, checkout by tag:
 [2019.2](https://github.com/rsodre/FulldomeCameraForUnity/tree/2019.2)
 
 
-* **Legacy Releases**, compatible with Standard Renderer only (not HDRP). Download from the [Releases page](https://github.com/rsodre/FulldomeCameraForUnity/releases) or checkout by tag:
+* **Legacy Standard Renderer**, (not HDRP/URP). Download from the [Releases page](https://github.com/rsodre/FulldomeCameraForUnity/releases) or checkout by tag:
 [2019.1](https://github.com/rsodre/FulldomeCameraForUnity/tree/2019.1) /
 [2018.3](https://github.com/rsodre/FulldomeCameraForUnity/tree/2018.3) /
 [2018.2](https://github.com/rsodre/FulldomeCameraForUnity/tree/2018.2) /
 [2018.1](https://github.com/rsodre/FulldomeCameraForUnity/tree/2018.1)
 
-* For **Unity 5.6**, use [FulldomeCameraForUnity5](https://github.com/rsodre/FulldomeCameraForUnity5)
+* For **Unity 5.6**, get [FulldomeCameraForUnity5](https://github.com/rsodre/FulldomeCameraForUnity5)
 
 
 
-## 1) Fulldome Camera
+## 1) Fulldome Camera (HDRP)
 
 ![](images/example.png)
 
@@ -87,21 +87,40 @@ Configure your fulldome camera on this GameObject...
 
 * **FulldomeCameraLegacy**: Uses the original implementation of this approach, using scripts from the `Legacy` folder. It worked exactly the same, but using the Camera component callbacks `OnPreRender` and `OnPostRender` as entry points to generate the Domemaster frame, and was a little bit more complicated to to setup. But was not compatible with Scriptable Render Pipeline. For more details, check the [2019.1](https://github.com/rsodre/FulldomeCameraForUnity/tree/2019.1) README.
 
+### Performance
+
+Since we're rendering 5 to 6 cameras each frame, some care need to be taken about performance. Some post effects will behave weirdly, like reflections and bloom, and since they also affect performance, it's better to disable completely.
+
+Looking at the Frame Debugger, we can pinpoint some choke points, research which effects use them and disable, at the Cameras's **Frame Setting Override** (my preference) or **Project Settings > Quality > HDRP Settings**. Removing these render settings helped a lot to improve performance:
+
+-	Disable Refraction
+-	Disable Distortion
+-	Disable SSR
+-	Disable Post > Depth Of Field
+-	Disable Post > Bloom
+
+Also...
+
+-	Disable Lightning & Realtime GI
+-	Avoid Visual Environment / Sky / Fog
+
+
 ## 2) VFX Graph
+
+**Work in Progress**, some tests are available at [FulldomeForUnity/Xperiments/VFXGraph](https://github.com/rsodre/FulldomeCameraForUnity/tree/master/Assets/FulldomeForUnity/Xperiments/VFXGraph). 
 
 No camera tricks! Please do not use together with the `FulldomeCamera.cs` script.
  
 Use a set of custom VFX blocks to distort particles around the camera, as  if it was a Fisheye lens.
  
-**Work in Progress**, will be added to the repository soon.
 
 ## 3) Shader Graph
+
+**Work in Progress**, some tests available at [FulldomeForUnity/Xperiments/ShaderGraph](https://github.com/rsodre/FulldomeCameraForUnity/tree/master/Assets/FulldomeForUnity/Xperiments/VertexShader). 
 
 No camera tricks! Please do not use together with the `FulldomeCamera.cs` script.
 
 Adapt your Shader Graph materials using a custom node to distort mesh vertices around the camera, as  if it was a Fisheye lens.
-
-**Work in Progress**, but some early tests are available at `FulldomeForUnity/Xperiments/ShaderGraph`. 
 
 The [main problem](https://forum.unity.com/threads/position-transformation.657289/) with this approach right now is that the SRP cameras do not have traditional Camera matrices to do the proper transformations. I'm still not sure if it's a bug or it's just how it works.
 

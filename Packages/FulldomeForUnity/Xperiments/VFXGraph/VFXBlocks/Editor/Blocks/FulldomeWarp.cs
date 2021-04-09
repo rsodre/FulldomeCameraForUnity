@@ -59,6 +59,7 @@ namespace UnityEditor.VFX.Block
 		//}
 
 
+		
 		public override string source
 		{
 			get
@@ -74,10 +75,10 @@ namespace UnityEditor.VFX.Block
 // Get current particle position
 float3 pos = position;
 
-// Get position in World position
-#ifndef VFX_WORLD_SPACE
-pos = mul(VFXGetObjectToWorldMatrix(),float4(pos,1.0f)).xyz;
-#endif
+// Get position in World position" + 
+"#ifndef VFX_WORLD_SPACE" + @"
+pos = mul(VFXGetObjectToWorldMatrix(),float4(pos,1.0f)).xyz;" + 
+"#endif" + @"
 
 float mag = length(pos);
 float theta = atan2( sqrt( pos.x * pos.x + pos.z * pos.z ), pos.y);
@@ -86,10 +87,10 @@ float r = theta / radians( Horizon / 2.0 );
 pos.xz = float2( r * cos(phi), r * sin(phi) );
 //pos.y = " + setDistance + @";
 
-// move position back to local space
-#ifndef VFX_WORLD_SPACE
-pos = mul(VFXGetWorldToObjectMatrix(),float4(pos,1.0f)).xyz;
-#endif
+// move position back to local space" + 
+"#ifndef VFX_WORLD_SPACE" + @"
+pos = mul(VFXGetWorldToObjectMatrix(),float4(pos,1.0f)).xyz;" + 
+"#endif" + @"
 
 position = " + setPosition + @";
 

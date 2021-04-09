@@ -1,0 +1,13 @@
+{
+    "name":"com.rsodre.fulldome-camera",
+    "version": "0.5",
+    "displayName": "Fulldome Camera",
+    "author": {
+        "name": "rsodre",
+        "url": "https://github.com/rsodre",
+        "email": "rbentos@yahoo.com"
+    },
+    "repository": {
+        "url": "https://github.com/rsodre/FulldomeCameraForUnity"
+    }
+}

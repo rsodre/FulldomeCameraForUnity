@@ -2,6 +2,18 @@
 
 Suite of tools for building games for Fulldome.
 
+## Installation
+
+This package can be directly installed as a git package into Unity's package manager:
+1. Open Package Manager
+2. Click <kbd>+</kbd> and <kbd>Add package from git URL</kbd>
+3. Paste ```https://github.com/prefrontalcortex/FulldomeCameraForUnity.git?path=/Packages/FulldomeForUnity```
+4. Click <kbd>Add</kbd>
+
+Note that packages are immutable (files can't be changed), copy the samples into your project as necessary.
+
+## Usage
+
 Here there are three approaches that can be used to simulate a fisheye lens on Unity.
 
 1.  **Fulldome Camera**: Renders the active camera as a 360 panorama (internally a Cubemap) and extracts a Domemaster from it.

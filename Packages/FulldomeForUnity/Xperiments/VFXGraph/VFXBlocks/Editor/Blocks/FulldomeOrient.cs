@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if HAVE_VFX_GRAPH
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -84,3 +86,5 @@ angleZ += degrees(-azimuth + PI * 0.5);
 		}
 	}
 }
+
+#endif

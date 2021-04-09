@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if HAVE_VFX_GRAPH
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -68,3 +70,5 @@ size = SampleCurve(SizeCurve, t);
 		}
 	}
 }
+
+#endif

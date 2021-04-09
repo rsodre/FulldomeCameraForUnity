@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#if HAVE_VFX_GRAPH
+
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.VFX;
 
@@ -98,3 +100,5 @@ position = " + setPosition + @";
 
 	}
 }
+
+#endif

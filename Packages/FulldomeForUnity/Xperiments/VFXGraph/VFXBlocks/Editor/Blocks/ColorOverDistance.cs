@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if HAVE_VFX_GRAPH
+
+using System;
 using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
@@ -141,3 +143,5 @@ float4 sampledColor = SampleGradient(gradient, t);
 
 	}
 }
+
+#endif

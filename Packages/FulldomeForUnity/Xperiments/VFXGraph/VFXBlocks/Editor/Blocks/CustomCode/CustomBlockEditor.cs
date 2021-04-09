@@ -1,3 +1,5 @@
+#if HAVE_VFX_GRAPH
+
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
@@ -204,3 +206,4 @@ namespace UnityEditor.VFX.Block
 
 }
 
+#endif

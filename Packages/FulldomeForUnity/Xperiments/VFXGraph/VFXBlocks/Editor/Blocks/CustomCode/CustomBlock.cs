@@ -1,3 +1,5 @@
+#if HAVE_VFX_GRAPH
+
 using System;
 using UnityEngine;
 using System.Collections.Generic;
@@ -106,3 +108,5 @@ namespace UnityEditor.VFX.Block
 
     }
 }
+
+#endif

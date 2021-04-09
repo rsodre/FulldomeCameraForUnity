@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.rsodre.fulldome-camera": {
+      "version": "file:FulldomeForUnity",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.aovrecorder": {
       "version": "0.1.1-preview.2",
       "depth": 0,

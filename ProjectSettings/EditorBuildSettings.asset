@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/FulldomeForUnity/Examples/FulldomeCameraHDRP.unity
+    path: Assets/FulldomeForUnity/Samples/FulldomeCameraHDRP.unity
     guid: a4c4277fb6d19448b871b58023872307
   m_configObjects: {}

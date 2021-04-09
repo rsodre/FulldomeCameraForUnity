@@ -1,0 +1,17 @@
+{
+    "name": "Rsodre.FulldomeCamera.Editor",
+    "references": [
+        "GUID:ff9f2d798bb4d8b44a51d74fd8286456"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

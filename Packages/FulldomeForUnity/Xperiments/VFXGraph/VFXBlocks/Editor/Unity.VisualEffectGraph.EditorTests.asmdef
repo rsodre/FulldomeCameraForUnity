@@ -1,0 +1,27 @@
+{
+    "name": "Unity.VisualEffectGraph.EditorTests",
+    "references": [
+        "Unity.VisualEffectGraph.Editor",
+        "Unity.VisualEffectGraph.Runtime",
+        "Unity.RenderPipelines.Core.Runtime",
+        "Unity.RenderPipelines.Core.Editor",
+        "Unity.VisualEffectGraph.RuntimeTests"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.visualeffectgraph",
+            "expression": "0.0.0",
+            "define": "HAVE_VFX_GRAPH"
+        }
+    ],
+    "noEngineReferences": false
+}

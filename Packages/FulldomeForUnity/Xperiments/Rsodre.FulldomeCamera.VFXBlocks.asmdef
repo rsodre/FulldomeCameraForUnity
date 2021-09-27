@@ -1,0 +1,19 @@
+{
+    "name": "Rsodre.FulldomeCamera.VFXBlocks",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.visualeffectgraph",
+            "expression": "0.0.0",
+            "define": "HAVE_VFX_GRAPH"
+        }
+    ],
+    "noEngineReferences": false
+}
